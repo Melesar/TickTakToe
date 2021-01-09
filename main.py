@@ -8,10 +8,12 @@ CIRCLE = 2
 
 cellSize = 200
 screenSize = 3 * cellSize
+gridWidth = 4
+elementWidth = 10
 
-elementColor = (0, 0, 0)
-gridColor = (0, 0, 0)
-backgroundColor = (255, 255, 255)
+elementColor = (255, 255, 255)
+gridColor = (243, 238, 7)
+backgroundColor = (51, 204, 255)
 
 aiDesicionTime = 500
 
@@ -26,10 +28,10 @@ def main():
     field = [[0 for x in range(3)] for y in range(3)]
 
     screen.fill(backgroundColor)
-    pygame.draw.line(screen, gridColor, (cellSize, 0), (cellSize, screenSize), 2)
-    pygame.draw.line(screen, gridColor, (2 * cellSize, 0), (2 * cellSize, screenSize), 2)
-    pygame.draw.line(screen, gridColor, (0, cellSize), (screenSize, cellSize), 2)
-    pygame.draw.line(screen, gridColor, (0, 2 * cellSize), (screenSize, 2 * cellSize), 2)
+    pygame.draw.line(screen, gridColor, (cellSize, 0), (cellSize, screenSize), gridWidth)
+    pygame.draw.line(screen, gridColor, (2 * cellSize, 0), (2 * cellSize, screenSize), gridWidth)
+    pygame.draw.line(screen, gridColor, (0, cellSize), (screenSize, cellSize), gridWidth)
+    pygame.draw.line(screen, gridColor, (0, 2 * cellSize), (screenSize, 2 * cellSize), gridWidth)
 
     font = pygame.font.SysFont(None, 72)
 
@@ -80,7 +82,7 @@ def drawField(field, screen):
             coords = (x * cellSize, y * cellSize) 
             fieldValue = field[x][y]
             if fieldValue == CIRCLE:
-                pygame.draw.circle(screen, elementColor, (coords[0] + 0.5 * cellSize, coords[1] + 0.5 * cellSize), cellSize * 0.5 * 0.8, 2)
+                pygame.draw.circle(screen, elementColor, (coords[0] + 0.5 * cellSize, coords[1] + 0.5 * cellSize), cellSize * 0.5 * 0.8, elementWidth)
             if fieldValue == CROSS:
                 drawCross(screen, coords)
 
@@ -90,8 +92,8 @@ def drawCross(screen, coords):
     end1 = (coords[0] + cellSize - offset, coords[1] + cellSize - offset)
     start2 = (coords[0] + offset, coords[1] + cellSize - offset)
     end2 = (coords[0] + cellSize - offset, coords[1] + offset)
-    pygame.draw.line(screen, elementColor, start1, end1, 2)
-    pygame.draw.line(screen, elementColor, start2, end2, 2)
+    pygame.draw.line(screen, elementColor, start1, end1, elementWidth)
+    pygame.draw.line(screen, elementColor, start2, end2, elementWidth)
 
 def renderText(text, font, screen):
     textImg = font.render(text, True, (255, 0, 0))
