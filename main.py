@@ -33,8 +33,6 @@ def main():
     pygame.draw.line(screen, gridColor, (0, cellSize), (screenSize, cellSize), gridWidth)
     pygame.draw.line(screen, gridColor, (0, 2 * cellSize), (screenSize, 2 * cellSize), gridWidth)
 
-    font = pygame.font.SysFont(None, 72)
-
     playerInput = False
     isGameOver = False
     while running:
@@ -56,11 +54,20 @@ def main():
         
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
-                x = int(event.pos[0] / cellSize)
-                y = int(event.pos[1] / cellSize)
-                if field[x][y] == 0:
-                    field[x][y] = CROSS
-                playerInput = True
+                mousePosition = event.pos
+                # ======= TASK # 1 =========
+                #
+                # Here you need to insert a code that puts a cross in the cell that the player have just clicked.
+                # The code that will do just that is below:
+                #
+                #   field[x][y] = CROSS
+                #   playerInput = True
+                #
+                # where x,y are indexes of the cell in the field array. The tricky part is to calculate those :)
+                # 
+                # Hint: 'screenSize' variable holds the size of the entire screen and 'cellSize' variable holds the size of one cell in pixels.
+                # The coordinate system starts in the top-left corner of the screen, X axis goes left, Y axis goes down. 'mousePosition' variable
+                # is the (x, y) coordinates of the mouse click.
         
         gameStatus = checkGameOver(field)
         if gameStatus >= 0:
@@ -68,13 +75,13 @@ def main():
 
         if gameStatus == 0:
             # Here goes tie
-            renderText("Tie", font, screen)
+            continue
         elif gameStatus == CROSS:
             # Here goes win
-            renderText("You won", font, screen)
+            continue
         elif gameStatus == CIRCLE:
             # Here goes lose
-            renderText("You lost", font, screen)
+            continue
     
 def drawField(field, screen):
     for x in range(3):
@@ -95,22 +102,24 @@ def drawCross(screen, coords):
     pygame.draw.line(screen, elementColor, start1, end1, elementWidth)
     pygame.draw.line(screen, elementColor, start2, end2, elementWidth)
 
-def renderText(text, font, screen):
-    textImg = font.render(text, True, (255, 0, 0))
-    rect = textImg.get_rect()
-    coords = ((screenSize  - rect.size[0]) * 0.5, (screenSize - rect.size[1]) * 0.5)
-    screen.blit(textImg, coords + rect.size)
-
 def aiStep(field):
-    emptyCells = []
-    for x in range(3):
-        for y in range(3):
-            if field[x][y] == 0:
-                emptyCells.append((x, y))
-    
-    if emptyCells:
-        cell = random.choice(emptyCells)
-        field[cell[0]][cell[1]] = CIRCLE
+    # ========= TASK #2 ===========
+    # Here you should make a turn for the AI opponent.
+    # For now let's make a pretty dumb AI that will just pick a random empty cell and put a circle in there.
+    # Again, the code that does it is the following:
+    #   
+    #   field[x][y] = CIRCLE
+    #
+    # The task to calculate x,y is again on you :) 
+    #
+    # 'field' parameter is a two-dimensional array of integers of size 3x3 where
+    # 0 - empty field
+    # 1 - cross. Use 'CROSS' variable to check for this
+    # 2 - circle. Use 'CIRCLE' variable to check for this
+    #
+    # If this dumb AI is too easy for you and you want to challenge yourself a bit more, you may implement
+    # a more reasonable one, but only after you finish this task and the next one :)
+    pass
 
 if __name__ == "__main__":
     main()
