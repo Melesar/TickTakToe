@@ -1,0 +1,13 @@
+This is the final task, with * :)
+
+Right now the game result is just printed to the console, but we need to show it properly as a text on the screen.
+So your task is:
+    - When the game is won show "You win" text;
+    - When the game is lost show "You lose" text;
+    - When there is a tie show "Tie" text;
+    - When the game is not finished yet, do nothing
+
+The text should be exactly in the center of the screen. Font, size and color you may choose to your liking :)
+
+Hint: the game is built with the library called Pygame, so I suggest you to start from there. To find the information
+about drawing text in Pygame, use the most useful tool in every programmer's arsenal - Google ;)

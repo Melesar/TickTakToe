@@ -74,14 +74,11 @@ def main():
             isGameOver = True
 
         if gameStatus == 0:
-            # Here goes tie
-            continue
+            print("Tie")
         elif gameStatus == CROSS:
-            # Here goes win
-            continue
+            print("You win")
         elif gameStatus == CIRCLE:
-            # Here goes lose
-            continue
+            print("You lose")
     
 def drawField(field, screen):
     for x in range(3):
